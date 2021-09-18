@@ -1,22 +1,21 @@
-defmodule Groot.MixProject do
+defmodule Mantis.MixProject do
   use Mix.Project
 
   @version "0.1.2"
 
   def project do
     [
-      app: :groot,
+      app: :mantis,
       version: @version,
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       aliases: aliases(),
-
       description: description(),
       package: package(),
-      name: "Groot",
-      source_url: "https://github.com/keathley/groot",
-      docs: docs(),
+      name: "Mantis",
+      source_url: "https://github.com/spawnfest/mantis",
+      docs: docs()
     ]
   end
 
@@ -24,7 +23,7 @@ defmodule Groot.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {Groot.Application, []}
+      mod: {Mantis.Application, []}
     ]
   end
 
@@ -32,11 +31,10 @@ defmodule Groot.MixProject do
   defp deps do
     [
       {:hlclock, "~> 1.0"},
-
       {:dialyxir, "~> 1.1", only: [:dev, :test], runtime: false},
       {:local_cluster, "~> 1.0", only: [:dev, :test]},
       {:schism, "~> 1.0", only: [:dev, :test]},
-      {:ex_doc, ">= 0.0.0", only: :dev},
+      {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
 
@@ -48,24 +46,24 @@ defmodule Groot.MixProject do
 
   def description do
     """
-    Groot is a distributed KV store built on distributed erlang, LWW Register
+    Mantis is a distributed KV store built on distributed erlang, LWW Register
     CRDTS, and Hybrid Logical Clocks.
     """
   end
 
   def package do
     [
-      name: "groot",
+      name: "mantis",
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/keathley/groot"},
+      links: %{"GitHub" => "https://github.com/spawnfest/mantis"}
     ]
   end
 
   def docs do
     [
       source_ref: "v#{@version}",
-      source_url: "https://github.com/keathley/groot",
-      main: "Groot",
+      source_url: "https://github.com/spawnfest/mantis",
+      main: "Mantis"
     ]
   end
 end

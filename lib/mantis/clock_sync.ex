@@ -1,4 +1,4 @@
-defmodule Groot.ClockSync do
+defmodule Mantis.ClockSync do
   @moduledoc false
   # This module regularly sends our local HLC to a random node in our cluster.
   # Each node in the cluster does this periodically in order to passively

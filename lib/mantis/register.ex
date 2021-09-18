@@ -1,17 +1,17 @@
-defmodule Groot.Register do
+defmodule Mantis.Register do
   @moduledoc false
   # LWW Register.
 
   # Creates a new register
   def new(key, val) do
-    {:ok, hlc} = HLClock.send_timestamp(Groot.Clock)
+    {:ok, hlc} = HLClock.send_timestamp(Mantis.Clock)
 
     %{key: key, value: val, hlc: hlc}
   end
 
   # Updates the value and creates a new HLC for our register
   def update(register, val) do
-    {:ok, hlc} = HLClock.send_timestamp(Groot.Clock)
+    {:ok, hlc} = HLClock.send_timestamp(Mantis.Clock)
 
     %{register | value: val, hlc: hlc}
   end
@@ -24,4 +24,3 @@ defmodule Groot.Register do
     |> Enum.at(0)
   end
 end
-

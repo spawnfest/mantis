@@ -1,4 +1,4 @@
-defmodule Groot.Storage do
+defmodule Mantis.Storage do
   @moduledoc false
   # This module provides a genserver for maintaining registers. It monitors
   # node connects in order to propagate existing registers.
@@ -7,7 +7,7 @@ defmodule Groot.Storage do
 
   use GenServer
 
-  alias Groot.Register
+  alias Mantis.Register
 
   def start_link(args) do
     GenServer.start_link(__MODULE__, args, name: __MODULE__)

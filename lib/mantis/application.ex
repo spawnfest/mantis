@@ -1,4 +1,4 @@
-defmodule Groot.Application do
+defmodule Mantis.Application do
   @moduledoc false
 
   use Application
@@ -7,12 +7,12 @@ defmodule Groot.Application do
     node_id = gen_node_id()
 
     children = [
-      {HLClock, name: Groot.Clock, node_id: node_id},
-      {Groot.ClockSync, [sync_interval: 3_000, clock: Groot.Clock]},
-      {Groot.Storage, []}
+      {HLClock, name: Mantis.Clock, node_id: node_id},
+      {Mantis.ClockSync, [sync_interval: 3_000, clock: Mantis.Clock]},
+      {Mantis.Storage, []}
     ]
 
-    opts = [strategy: :one_for_one, name: Groot.Supervisor]
+    opts = [strategy: :one_for_one, name: Mantis.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
