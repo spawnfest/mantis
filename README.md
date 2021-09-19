@@ -4,7 +4,7 @@ Mantis is a distributed, eventually consistent KV store built on top of [Groot](
 
 Mantis periodically flushes the KV content to a database, it also flushes when it is being shut down.
 
-Mantis is a Spawnfest project and is not ready for use. [Note for judges](https://github.com/spawnfest/mantis/JUDGES.md)
+Mantis is a Spawnfest project and is not ready for use. [Note for judges](https://github.com/spawnfest/mantis/blob/master/JUDGES.md)
 
 ## Installation
 
