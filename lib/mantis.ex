@@ -39,7 +39,23 @@ defmodule Mantis do
   be fixed in a future release.
   """
 
+  use Supervisor
+
   alias Mantis.Storage
+
+  def start_link(opts) do
+    repo = Keyword.get(opts, :repo) || raise ArgumentError, "must supply a repo"
+
+    Supervisor.start_link(__MODULE__, [repo: repo], name: Mantis.Supervisor)
+  end
+
+  def init(opts) do
+    children = [
+      {Mantis.Storage, [repo: opts[:repo]]}
+    ]
+
+    Supervisor.init(children, strategy: :one_for_one)
+  end
 
   @doc """
   Gets a register's value. If the register is not found it returns `nil`.

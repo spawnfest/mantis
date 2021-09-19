@@ -8,6 +8,7 @@ defmodule Mantis.MixProject do
       app: :mantis,
       version: @version,
       elixir: "~> 1.9",
+      elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       aliases: aliases(),
@@ -34,7 +35,10 @@ defmodule Mantis.MixProject do
       {:dialyxir, "~> 1.1", only: [:dev, :test], runtime: false},
       {:local_cluster, "~> 1.0", only: [:dev, :test]},
       {:schism, "~> 1.0", only: [:dev, :test]},
-      {:ex_doc, ">= 0.0.0", only: :dev}
+      {:ex_doc, ">= 0.0.0", only: :dev},
+      {:ecto_sql, "~> 3.0"},
+      {:postgrex, "~> 0.14"},
+      {:mox, "~> 1.0", only: :test}
     ]
   end
 
@@ -66,4 +70,7 @@ defmodule Mantis.MixProject do
       main: "Mantis"
     ]
   end
+
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_env), do: ["lib"]
 end

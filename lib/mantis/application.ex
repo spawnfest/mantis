@@ -9,10 +9,9 @@ defmodule Mantis.Application do
     children = [
       {HLClock, name: Mantis.Clock, node_id: node_id},
       {Mantis.ClockSync, [sync_interval: 3_000, clock: Mantis.Clock]},
-      {Mantis.Storage, []}
     ]
 
-    opts = [strategy: :one_for_one, name: Mantis.Supervisor]
+    opts = [strategy: :one_for_one, name: Mantis.Clock.Supervisor]
     Supervisor.start_link(children, opts)
   end
 

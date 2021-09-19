@@ -1,21 +1,45 @@
 # Mantis
 
-I am Mantis.
+Mantis is a distributed, eventually consistent KV store built on top of [Groot](https://github.com/keathley/groot). It inherits the characteristics of Groot (LWW CRDT and Hybrid-Logical Clock), but while Groot is meant for ephemeral data, Mantis adds a persistence layer.
 
-## Usage
+Mantis periodically flushes the KV content to a database, it also flushes when it is being shut down.
 
-Mantis provides a distributed KV store for ephemeral data. It utilizes LWW-register
-CRDTs and Hybrid-Logical clocks to ensure availability and a level
-of consistency. For technical information on Mantis's implementation, please
-refer to the [docs](https://hexdocs.pm/mantis).
+Mantis is a Spawnfest project and is not ready for use. [Note for judges](https://github.com/spawnfest/mantis/JUDGES.md)
 
 ## Installation
 
 ```elixir
 def deps do
   [
-    {:mantis, "~> 0.1"}
+    {:mantis, "git://github.com/spawnfest/mantis.git"}
   ]
+end
+```
+
+Next, start Mantis in your supervision tree in `application.ex` and provide it a repo.
+
+```elixir
+children = [
+  YourApp.Repo,
+  {Mantis, [repo: YourApp.Repo]}
+]
+```
+
+You also need to create a table for Mantis to store the data.
+
+`mix ecto.gen.migration add_mantis_stores_table`
+
+```
+defmodule MyApp.Repo.Migrations.AddMantisStoresTable do
+  use Ecto.Migration
+
+  def change do
+    create table(:mantis_stores) do
+      add :clock, :string, null: false
+      add :node, :string, null: false
+      add :registers, :binary, null: false
+    end
+  end
 end
 ```
 
